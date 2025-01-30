@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+
+   <div class="login-box">
+     <p style="color: brown; text-align: center;"><%=msg%></p>
+    <h2>Login</h2>
+    <form action="/home/login" method="post">
+      <div class="input-box">
+        <input type="text" name="username" required>
+        <label>Username</label>
+      </div>
+      <div class="input-box">
+        <input type="password" name="password" required>
+        <label>Password</label>
+      </div>
+      <button type="submit">Login</button>
+      <div class="register-link">
+        <p>Don't have an account? <a href="/newuser">Register</a></p>
+       
+      </div>
+    </form>
+  </div>
+
+
+
+<script src="/java/index.js"></script>
+</body>
+</html>

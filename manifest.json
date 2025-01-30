@@ -1,0 +1,7 @@
+{
+  "manifest_version": 2,
+  "name": "emotional board",
+  "version": "1.0.0",
+  "description": "this extension is build to help to mental health patients",
+  "permissions": ["tabs"]  
+}

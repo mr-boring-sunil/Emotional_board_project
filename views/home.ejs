@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/css/style.css"> <!-- Styles for PC -->
+
+  
+</head>
+<body>
+  <div class="container">
+      <h1>Emotion Board</h1>
+      <div class="motivation_box">
+        <h1>Motivational quotes</h1>
+       
+        <div class="m_box"><h1 class="motivation_para"><%=quote.description%></h2></div>
+        <!-- <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a> -->
+      </div>
+      
+        <div class="sticky_box">
+       
+             <div class="sticky_notes" id="sticky_notes">
+              <%const data=user[0]["stickynote"];%>
+      
+                <%for(note of data){%>
+                    <div class="sticky_note">
+                      <p id="time"><form action="/home/<%=user[0]._id%>/delete/<%=note._id%>" method="get" style="display: inline;"><button><i class="fa-solid fa-xmark"></i></button></form><%=note.creatd_at%></p>            <br>
+                      <p><%=note.description%></p>
+                      
+                      
+                    </div>
+              <%}%> 
+             </div>
+             <div  id="sticky_text">
+              
+
+              <form action="/home/add/<%=user[0]._id%>" method="post">
+                <textarea name="feeling" cols="60" rows="8" id="textarea" placeholder="Type your thoughts here..." required></textarea>
+                <button id="sticky_btn" type="submit">Add</button>
+              </form>
+              
+            </div>
+             
+        </div>
+   
+      
+
+  </div>
+  <script src="/java/index.js"></script>
+</body>
+</html>
+
+
