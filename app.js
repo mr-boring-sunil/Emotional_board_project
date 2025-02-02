@@ -1,6 +1,8 @@
 const express=require("express");
 const { request } = require("http");
 const app=express();
+const http=require("http");
+const server=http.createServer(app);
 app.set("view engine","ejs");
 const mongoose=require("mongoose");
 var flash = require('connect-flash');
@@ -24,6 +26,22 @@ app.use(session({
   }
 }));
  app.use(flash());
+ const {Server}=require("socket.io");
+ const io=new Server(server,{
+   connectionStateRecovery:{}
+ });
+ io.on("connection",(Socket)=>{
+  console.log(`user connect`);
+  Socket.on("disconnect",()=>{
+    console.log("user is disconnected");
+  })
+
+  Socket.on("message",(mes)=>{
+    //io.emit("mes",mes);  /*it will send the message to every body including the sender*/
+    Socket.broadcast.emit("mes",mes);   /*it will send the message to every body excluding the sender*/
+  })
+})
+
 
 async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/note');
@@ -40,6 +58,8 @@ app.get("/login",(req,res)=>{
   let msg=req.flash("msg");
   res.render("login.ejs",{msg});
 })
+
+
 
 
 app.post("/home/login",async(req,res)=>{
@@ -162,7 +182,7 @@ app.use((req,res,next)=>{
 
 
 
-app.listen(8000,(req,res)=>{
+server.listen(8000,(req,res)=>{
   console.log("app is listing");
 })
 
